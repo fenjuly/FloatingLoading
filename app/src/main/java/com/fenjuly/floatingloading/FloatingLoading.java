@@ -5,26 +5,28 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.RectF;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 /**
- * Created by liurongchan on 15/4/27.
+ * Created by fenjuly with love
  */
 public class FloatingLoading extends View {
 
     private static final int POINTS_COUNT = 4;
+    private static final int DURATION = 150;
 
-    private static final int[] default_colors = new int[] {Color.rgb(0, 155, 254), Color.rgb(6, 128, 209),
+    private static final int[] default_colors = new int[] {
+            Color.rgb(0, 155, 254), Color.rgb(6, 128, 209),
             Color.rgb(6, 109, 177), Color.rgb(255, 255, 255)
     };
 
-    private static final int STATUS_BIG = 1;
-    private static final int STATUS_MIDDLE = 2;
-    private static final int STATUS_SMALL = 3;
-    private static final int STATUS_NORMAL = 4;
+    private static final int[] color_resources = new int[] {
+            R.styleable.FloatingLoading_loading_large_color,
+            R.styleable.FloatingLoading_loading_middle_color,
+            R.styleable.FloatingLoading_loading_small_color,
+            R.styleable.FloatingLoading_loading_special_color
+    };
 
     private int[] shownColors = new int[POINTS_COUNT];
 
@@ -48,7 +50,9 @@ public class FloatingLoading extends View {
 
         final TypedArray attributes = context.getTheme().obtainStyledAttributes(attrs, R.styleable.FloatingLoading,
                 defStyleAttr, 0);
-
+        for (int i = 0; i < POINTS_COUNT; i++) {
+            shownColors[i] = attributes.getColor(color_resources[i], default_colors[i]);
+        }
         attributes.recycle();
         init();
     }
@@ -80,61 +84,79 @@ public class FloatingLoading extends View {
     }
 
     private int count = -1;
+    private int duration = DURATION;
     @Override
     protected void onDraw(Canvas canvas) {
         count++;
         if (count == 0) {
             initializePoints();
         }
-
        int remainder = count % POINTS_COUNT;
        for (int i = 0; i < POINTS_COUNT; i++) {
            int orig_position = (i + POINTS_COUNT - remainder) % POINTS_COUNT;
            circlePoints[i].raduis = typePoints[orig_position].raduis;
            circlePoints[i].color = typePoints[orig_position].color;
-
-           Log.e("exchange", i + "-" + orig_position);
        }
 
-        for (CirclePoint c : circlePoints) {
-            Log.e("point", c.toString());
-        }
        for (int i = 0; i < POINTS_COUNT; i++) {
            CirclePoint p = circlePoints[i];
            Paint t = colorPaints[i];
            t.setColor(p.color);
            canvas.drawCircle(p.x, p.y, p.raduis, t);
        }
-        postInvalidateDelayed(150);
+        postInvalidateDelayed(duration);
+    }
+
+    public void setPointColor(int position, int color) {
+        if (!(position >= 0 && position < POINTS_COUNT))
+            return;
+        shownColors[position] = color;
+        if (typePoints[position] != null) {
+            typePoints[position].color = color;
+        }
+    }
+
+    public void setPointsColor(int[] color_array) {
+        if (color_array.length > POINTS_COUNT)
+            return;
+        for (int i = 0; i < POINTS_COUNT; i++) {
+            shownColors[i] = color_array[i];
+            if (typePoints[i] != null) {
+                typePoints[i].color = color_array[i];
+            }
+        }
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 
     protected void init() {
         initializePaints();
-
     }
-
 
 
     protected void initializePaints() {
         for (int i = 0; i < POINTS_COUNT; i++) {
             colorPaints[i] = new Paint(Paint.ANTI_ALIAS_FLAG);
-            colorPaints[i].setColor(default_colors[i]);
         }
     }
 
     protected void initializePoints() {
         int width_step = getWidth() / 8;
         int height = getHeight();
-        int raduis_step = height / 8;
+        int raduis_base = height / 3;
         for (int i = 0; i < POINTS_COUNT; i++) {
             CirclePoint p = new CirclePoint();
             p.x = getPaddingLeft() + (2 * i + 1) * width_step;
             p.y = getPaddingTop() + height / 2;
-            p.color = default_colors[i];
+            p.color = shownColors[i];
             if (i == 3) {
                 p.raduis = circlePoints[1].raduis;
             } else {
-                p.raduis = raduis_step * (int) Math.pow(2, i);
+                p.raduis = raduis_base;
+                raduis_base = raduis_base * 2 / 3;
+
             }
             circlePoints[i] = p;
             typePoints[i] = new CirclePoint(p.x, p.y, p.raduis, p.color);
@@ -156,16 +178,5 @@ public class FloatingLoading extends View {
         this.raduis = raduis;
         this.color = color;
     }
-
-        @Override
-        public String toString() {
-            return "CirclePoint{" +
-                    "raduis=" + raduis +
-                    ", x=" + x +
-                    ", y=" + y +
-                    ", color=" + color +
-                    '}';
-        }
     }
-
 }

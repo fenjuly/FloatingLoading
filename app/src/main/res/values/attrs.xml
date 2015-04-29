@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="FloatingLoading">
-        <attr name="loading_color" format="color"/>
-
+        <attr name="loading_large_color" format="color"/>
+        <attr name="loading_middle_color" format="color"/>
+        <attr name="loading_small_color" format="color"/>
+        <attr name="loading_special_color" format="color"/>
     </declare-styleable>
 
 </resources>
