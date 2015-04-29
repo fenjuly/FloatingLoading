@@ -8,9 +8,8 @@
                 android:paddingBottom="@dimen/activity_vertical_margin"
                 tools:context=".MainActivity">
 
-    <TextView
-        android:text="@string/hello_world"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+   <com.fenjuly.floatingloading.FloatingLoading
+       android:layout_width="100dp"
+       android:layout_height="25dp" />
 
 </RelativeLayout>
