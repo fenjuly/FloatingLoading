@@ -1,4 +1,4 @@
-package com.fenjuly.floatingloading;
+package com.fenjuly.mylibrary;
 
 import android.content.Context;
 import android.content.res.TypedArray;

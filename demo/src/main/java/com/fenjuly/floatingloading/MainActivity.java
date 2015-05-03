@@ -5,6 +5,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.fenjuly.mylibrary.FloatingLoading;
+
 
 public class MainActivity extends ActionBarActivity {
 

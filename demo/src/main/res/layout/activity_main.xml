@@ -11,12 +11,12 @@
                 android:background="#FF6A6A"
     >
 
-   <com.fenjuly.floatingloading.FloatingLoading
+   <com.fenjuly.mylibrary.FloatingLoading
        android:id="@+id/sampple1"
        android:layout_width="100dp"
        android:layout_height="25dp" />
 
-    <com.fenjuly.floatingloading.FloatingLoading
+    <com.fenjuly.mylibrary.FloatingLoading
         android:id="@+id/sampple2"
         android:layout_below="@+id/sampple1"
         android:layout_marginTop="10dp"
@@ -27,7 +27,7 @@
         custom:loading_small_color="#8B7E66"
         />
 
-    <com.fenjuly.floatingloading.FloatingLoading
+    <com.fenjuly.mylibrary.FloatingLoading
         android:id="@+id/sampple3"
         android:layout_below="@+id/sampple2"
         android:layout_marginTop="10dp"
