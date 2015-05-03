@@ -7,7 +7,7 @@ This is a simple view that can be used into loading, refresh or wait. This is a 
  
 ###ScreenShot
 
-![Imgur](http://i.imgur.com/PeY5nZl.gifv)
+![Imgur](http://i.imgur.com/PeY5nZl.gif)
 
 
 ###Usage
