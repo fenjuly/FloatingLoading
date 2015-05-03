@@ -50,8 +50,7 @@ final FloatingLoading v1 = (FloatingLoading) findViewById(R.id.sampple1);
 
 and there also offered a method you can set the refresh rate.
   
-  ``` public void setDuration(int duration)
-  ```         
+  ``` public void setDuration(int duration)```         
 	 
   
 
