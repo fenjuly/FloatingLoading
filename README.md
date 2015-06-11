@@ -58,7 +58,7 @@ and there also offered a method you can set the refresh rate.
 ###Other
 All rights `unreserved`!
 
-I'll be very glad that somebody use this shit code.
+I'll be very glad if somebody use this shit code.
 
 
 
