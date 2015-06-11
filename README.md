@@ -7,7 +7,7 @@ This is a simple view that can be used into loading, refresh or wait. This is a 
  
 ###ScreenShot
 
-![Imgur](http://i.imgur.com/PeY5nZl.gifv)
+![Imgur](http://i.imgur.com/PeY5nZl.gif)
 
 
 ###Usage
@@ -50,8 +50,7 @@ final FloatingLoading v1 = (FloatingLoading) findViewById(R.id.sampple1);
 
 and there also offered a method you can set the refresh rate.
   
-  ``` public void setDuration(int duration)
-  ```         
+  ``` public void setDuration(int duration)```         
 	 
   
 
